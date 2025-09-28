@@ -10,21 +10,24 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.cupcakeapp.data.DataSource   // 👈 IMPORTA el DataSource
+import com.example.cupcakeapp.data.DataSource
+import com.example.cupcakeapp.ui.StartOrderScreen   // 👈 ahora sí existe
+import com.example.cupcakeapp.ui.SelectOptionScreen
 import com.example.cupcakeapp.ui.theme.CupcakeAppTheme
 
 enum class CupcakeScreen(val title: String) {
     Start(title = "Cupcake App"),
     Flavor(title = "Choose Flavor"),
 }
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -91,11 +94,23 @@ fun CupcakeApp() {
                         .fillMaxSize()
                         .padding(dimensionResource(R.dimen.padding_medium))
                 )
+            }
 
-                composable(route = CupcakeScreen.Flavor.name) {
-                    SelectOptionScreen()
+            composable(route = CupcakeScreen.Flavor.name) {
+                val context = LocalContext.current
+                val flavorOptions = remember(context) {
+                    DataSource.flavors.map { id -> context.getString(id) }
                 }
 
+                SelectOptionScreen(
+                    options = flavorOptions,
+                    onSelectionChanged = { selected ->
+                        // aquí puedes guardar en ViewModel o navegar
+                    },
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(dimensionResource(R.dimen.padding_medium))
+                )
             }
         }
     }
