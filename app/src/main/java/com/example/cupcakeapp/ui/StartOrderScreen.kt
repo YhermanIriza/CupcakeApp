@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -21,11 +22,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.cupcakeapp.R
 import com.example.cupcakeapp.data.DataSource
 import com.example.cupcakeapp.ui.theme.CupcakeAppTheme
-import androidx.compose.foundation.layout.padding
-
 
 @Composable
 fun StartOrderScreen(
@@ -54,7 +52,7 @@ fun StartOrderScreen(
 
         Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_small)))
 
-        // Nueva columna con los botones generados dinámicamente
+        // Columna con botones dinámicos
         Column(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -102,3 +100,4 @@ fun StartOrderPreview() {
         )
     }
 }
+
