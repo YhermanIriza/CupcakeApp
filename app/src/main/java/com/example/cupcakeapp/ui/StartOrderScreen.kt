@@ -35,12 +35,24 @@ fun StartOrderScreen(
             modifier = Modifier.width(300.dp)
         )
 
+        // Texto debajo de la imagen
         Text(
             text = stringResource(R.string.order_cupcakes),
             style = MaterialTheme.typography.headlineSmall
         )
 
         Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_small)))
+
+        // Nueva columna para botones de acción u otros elementos
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(
+                dimensionResource(R.dimen.padding_medium)
+            )
+        ) {
+            // Aquí se colocarán más elementos (botones, inputs, etc.)
+        }
 
         Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_medium)))
     }
