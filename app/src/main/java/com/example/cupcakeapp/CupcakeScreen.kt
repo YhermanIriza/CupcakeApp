@@ -20,11 +20,11 @@ import androidx.navigation.compose.rememberNavController
 import com.example.cupcakeapp.data.DataSource   // 👈 IMPORTA el DataSource
 import com.example.cupcakeapp.ui.theme.CupcakeAppTheme
 
-// ✅ Enum de pantallas
 enum class CupcakeScreen(val title: String) {
     Start(title = "Cupcake App"),
-    // aquí luego irán Flavor, Pickup, Summary...
+    Flavor(title = "Choose Flavor"),
 }
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -83,14 +83,19 @@ fun CupcakeApp() {
         ) {
             composable(route = CupcakeScreen.Start.name) {
                 StartOrderScreen(
-                    quantityOptions = DataSource.quantityOptions,   // ✅ CORREGIDO
+                    quantityOptions = DataSource.quantityOptions,
                     onNextButtonClicked = {
-                        // 👈 aquí después pondrás la navegación a la siguiente pantalla
+                        navController.navigate(CupcakeScreen.Flavor.name)
                     },
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(dimensionResource(R.dimen.padding_medium))
                 )
+
+                composable(route = CupcakeScreen.Flavor.name) {
+                    SelectOptionScreen()
+                }
+
             }
         }
     }
